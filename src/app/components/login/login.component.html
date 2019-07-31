@@ -1,0 +1,21 @@
+<div class="container">
+  <form (submit)="submitLogin()">
+    <div>
+      <label for="email">Email</label>
+      <input class="form-control" #emailInput type="email" placeholder="email" name="email" [(ngModel)]="data.email">
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input class="form-control" #passwordInput type="password" placeholder="password" name="password" [(ngModel)]="data.password">
+    </div>
+    <div *ngIf="error">
+      <div class="alert alert-danger" role="alert">
+        Credenciales incorrectas!
+      </div>
+    </div>
+    <div>
+      <button class="btn btn-primary">Login</button>
+    </div>
+  </form> 
+  <a [routerLink]="homeLink">Go to home</a>
+</div>
