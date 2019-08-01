@@ -9,9 +9,13 @@ import { HomeService } from './home.service';
 })
 export class HomeComponent implements OnInit {
 
+  demo:string;
+
   constructor(
     private homeService: HomeService
-  ) { }
+  ) { 
+    this.demo = 'here!';
+  }
 
   ngOnInit() {
     this.homeService.getContent()

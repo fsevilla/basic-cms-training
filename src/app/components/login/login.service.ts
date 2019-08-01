@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { map, catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { BaseHttpService } from 'src/app/globals/services/base-http.service';
 import { environment } from '../../../environments/environment';
+import { map } from 'rxjs/operators';
 
 import { AuthenticationService } from 'src/app/globals/services/authentication.service';
 
@@ -12,35 +11,28 @@ import { AuthenticationService } from 'src/app/globals/services/authentication.s
 export class LoginService {
 
   constructor(
-    private httpClient: HttpClient,
+    private baseHttp: BaseHttpService,
     private authenticationService: AuthenticationService
   ) {
-    console.log('Constructed loginService', this.httpClient);
   }
 
-  private handleError(error:HttpErrorResponse) {
-    console.log('Service failed:', error)
-    return throwError('Exception!');
-  }
+  login(username:string, password:string):Promise<any> {
+    let url = `${environment.apiUrl}oauth/token`;
 
-  login(params:any):Promise<any> {
-    let url = `${environment.apiUrl}/login`;
+    let data = {
+      username,
+      password,
+      client_id: environment.clientKey,
+      client_secret: environment.clientSecret,
+      grant_type: environment.grantType
+    };
 
-    const headers = new HttpHeaders({
-      'content-type': 'application/json'
-    });
-
-    const httpOptions = {
-      headers
-    }
-
-    return this.httpClient.post(url, params, httpOptions)
+    return this.baseHttp.simplePost(url, data)
       .pipe(
         map(response => {
           this.authenticationService.saveSession(response);
           return response;
-        }),
-        catchError(this.handleError)
+        })
       )
       .toPromise();
   }

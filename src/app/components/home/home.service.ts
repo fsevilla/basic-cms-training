@@ -24,7 +24,7 @@ export class HomeService {
   }
 
   getContent():Promise<any> {
-    const url = `${environment.apiUrl}/content/home`;
+    const url = `${environment.apiUrl}${environment.apiPath}user`;
 
     return this.baseHttp.get(url)
       .pipe(

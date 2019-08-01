@@ -10,13 +10,11 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   data:any = {
-    email: '',
+    username: '',
     password: ''
   };
 
   error:boolean;
-
-  homeLink:string = '/home';
 
   constructor(
     private loginService: LoginService,
@@ -28,8 +26,8 @@ export class LoginComponent implements OnInit {
   }
 
   submitLogin() {
-    if(this.data.email && this.data.password) {
-      this.loginService.login(this.data)
+    if(this.data.username && this.data.password) {
+      this.loginService.login(this.data.username, this.data.password)
         .then(() => {
           this.router.navigate(['/home']);
         })
@@ -37,21 +35,7 @@ export class LoginComponent implements OnInit {
           this.error = true;
         });
     } else {
-    }
-
-  }
-
-  altSubmit(username, password) {
-    if(!username.value) {
-      username.classList.add('error');
-    } else {
-      username.classList.remove('error');     
-    }
-
-    if(!password.value) {
-      password.classList.add('error');     
-    } else {
-      password.classList.remove('error');     
+      console.log('Missing data');
     }
   }
 
