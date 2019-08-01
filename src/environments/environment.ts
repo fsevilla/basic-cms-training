@@ -4,7 +4,12 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://demo1076355.mockable.io'
+  oldApiUrl: 'http://demo1076355.mockable.io',
+  apiUrl: 'http://localhost:8000/',
+  apiPath: 'api/',
+  clientSecret: 'EaNWQo6E4VgK2DqN8IMOeCapnzU2VOEhyI4McdGx',
+  clientKey: '2',
+  grantType: 'password'
 };
 
 /*

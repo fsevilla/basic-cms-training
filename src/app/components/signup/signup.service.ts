@@ -13,7 +13,7 @@ export class SignupService {
   ) { }
 
   register(user:any):Promise<any> {
-    let url = `${environment.apiUrl}/signup`;
+    let url = `${environment.apiUrl}${environment.apiPath}register`;
 
     return this.baseHttp.simplePost(url, user)
       .toPromise();

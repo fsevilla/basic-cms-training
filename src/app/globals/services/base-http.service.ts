@@ -20,7 +20,27 @@ export class BaseHttpService {
     if(error.status === 401) {
       return throwError('SessionExpired Exception!');
     }
-    return throwError('BaseHttp Exception!');
+    let message:string = '';
+    switch(error.status) {
+      case 400:
+          message = 'IncorrectData Exception';
+          break;
+      case 401:
+          message = 'Authentication Exception';
+          break;
+      case 403:
+          message = 'Authorization Exception';
+          break;
+      case 404:
+          message = 'NotFound Exception';
+          break;
+      case 500:
+          message = 'UnkownError Exception';
+          break;
+      default:
+          message = 'BaseHttp Exception';
+    }
+    return throwError(message);
   }
 
   post(url:string, params:any) {
@@ -43,7 +63,10 @@ export class BaseHttpService {
     const httpOptions = {
       headers
     }
-    return this.httpClient.post(url, params, httpOptions);
+    return this.httpClient.post(url, params, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   get(url:string) {

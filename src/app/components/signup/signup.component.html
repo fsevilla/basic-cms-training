@@ -16,20 +16,10 @@
           <label for="name">Email</label>
           <input formControlName="email" type="email" class="form-control" name="email" required />
         </div>
-        <!-- <div class="form-group">
-          <label for="gender">Gender</label>
-          <select name="gender" class="form-control">
-            <option value="" selected>Choose one...</option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-            <option value="U">Unknown</option>
-          </select>
-        </div> -->
         <div class="form-group">
-            <label for="gender">Gender radio</label>
-            <input type="radio" name="gender" value="M"> M
-            <input type="radio" name="gender" value="F"> F
-          </div>
+          <label for="code">Code</label>
+          <input formControlName="code" type="text" class="form-control" name="code" />
+        </div>
         <div class="form-group">
           <label for="password">Password</label>
           <input formControlName="password" type="password" class="form-control" name="password" required />
@@ -42,8 +32,8 @@
           <p>*All fields are required</p>
         </div>
         <div class="form-group">
-          <a (click)="cancel()" class="btn btn-danger">Cancel</a>
-          <button [disabled]="signupForm.invalid" class="btn btn-primary">Sign up</button>
+          <a (click)="cancel()" class="btn btn-default">Cancel</a>
+          <button [disabled]="signupForm.invalid" class="btn btn-primary m-l-2">Sign up</button>
         </div>
       </form>
     </div>
