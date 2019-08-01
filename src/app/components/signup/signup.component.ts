@@ -10,10 +10,6 @@ import { SignupService } from './signup.service';
 })
 export class SignupComponent implements OnInit {
 
-  user:any = {
-    gender: '',
-  };
-
   signupForm:FormGroup;
 
   constructor(
@@ -26,7 +22,10 @@ export class SignupComponent implements OnInit {
         Validators.required
       ]),
       'username': new FormControl('', [
-        Validators.required, Validators.minLength(6)
+        Validators.required, Validators.minLength(5)
+      ]),
+      'code': new FormControl('', [
+        Validators.required, Validators.minLength(4)
       ]),
       'email': new FormControl('', [
         Validators.required, Validators.email
@@ -34,21 +33,30 @@ export class SignupComponent implements OnInit {
       'password': new FormControl('', [
         Validators.required, 
         Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/),
-        this.matchPassword.bind(this)
       ]),
       'confirmPassword': new FormControl('',[
-        Validators.required,
-        this.matchPassword.bind(this)
+        Validators.required
       ])
-    });
+    }, { validators: [this.matchPassword.bind(this)]});
   }
 
-  validateSignupForm() {
-    console.log('Form group:', this.signupForm);
+  private validateSignupForm() {
     return this.signupForm.valid;
   }
 
-  matchPassword(control: AbstractControl): ValidationErrors | null {
+  private getFormControlValue(controlName:string):any {
+    return this.signupForm.get(controlName).value;
+  }
+
+  private getFormValues() {
+    let valuesObj:any = {};
+    for(let k in this.signupForm.controls) {
+      valuesObj[k] = this.getFormControlValue(k);
+    }
+    return valuesObj;
+  }
+
+  matchPassword(): ValidationErrors | null {
     if(!this.signupForm) return;
     const password = this.signupForm.controls.password.value;
     const confirm = this.signupForm.controls.confirmPassword.value;
@@ -61,9 +69,10 @@ export class SignupComponent implements OnInit {
   }
 
   registerUser() {
-    console.log('Submit form', this.user);
     if(!this.validateSignupForm()) return;
-    this.signupService.register(this.user)
+    const data = this.getFormValues();
+    console.log('will submit user: ', data);
+    this.signupService.register(data)
       .then(response => {
         console.log('Created user: ', response);
       })
