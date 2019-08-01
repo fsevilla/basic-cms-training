@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -73,15 +73,27 @@ export class BaseHttpService {
       );
   }
 
-  get(url:string) {
+  get(url:string, params?:any) {
+    params = params || {};
+
     const headers = new HttpHeaders({
       'content-type': 'application/json',
       'authorization': this.authenticationService.getToken()
     });
 
-    const httpOptions = {
-      headers
+    let parameters = new HttpParams();
+    
+    for(let k in params) {
+      parameters = parameters.set(k, params[k]);
     }
+
+    const httpOptions = {
+      headers,
+      params: parameters
+    }
+
+    console.log('HttpParams', parameters);
+
     return this.httpClient.get(url, httpOptions)
       .pipe(
         catchError(this.handleError)

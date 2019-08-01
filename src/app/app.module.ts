@@ -13,6 +13,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { InputStatusDirective } from './globals/directives/input-status.directive';
 import { HeaderComponent } from './globals/components/header/header.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { UsersComponent } from './components/users/users.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { LogoutComponent } from './components/logout/logout.component';
     SignupComponent,
     InputStatusDirective,
     HeaderComponent,
-    LogoutComponent
+    LogoutComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
