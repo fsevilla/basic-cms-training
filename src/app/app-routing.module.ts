@@ -10,6 +10,8 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { UsersComponent } from './components/users/users.component';
 import { UserDetailsComponent } from './components/users/user-details/user-details.component';
 import { UsersListComponent } from './components/users/users-list/users-list.component';
+import { PostsListComponent } from './modules/posts/posts-list/posts-list.component';
+import { AlbumsComponent } from './modules/gallery/albums/albums.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -21,6 +23,8 @@ const routes: Routes = [
     { path: '', component: UsersListComponent },
     { path: ':userId', component: UserDetailsComponent }
   ] },
+  { path: 'posts', loadChildren: () => import('./modules/posts/posts.module').then(mod => mod.PostsModule) },
+  { path: 'gallery', loadChildren: () => import('./modules/gallery/gallery.module').then(mod => mod.GalleryModule) },
   { path: '**', component: NotFoundComponent }
 ];
 
