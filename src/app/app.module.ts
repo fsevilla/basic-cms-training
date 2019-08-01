@@ -14,6 +14,8 @@ import { InputStatusDirective } from './globals/directives/input-status.directiv
 import { HeaderComponent } from './globals/components/header/header.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { UsersComponent } from './components/users/users.component';
+import { UserDetailsComponent } from './components/users/user-details/user-details.component';
+import { UsersListComponent } from './components/users/users-list/users-list.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { UsersComponent } from './components/users/users.component';
     InputStatusDirective,
     HeaderComponent,
     LogoutComponent,
-    UsersComponent
+    UsersComponent,
+    UserDetailsComponent,
+    UsersListComponent
   ],
   imports: [
     BrowserModule,

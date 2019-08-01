@@ -8,6 +8,8 @@ import { HomeComponent } from './components/home/home.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { UsersComponent } from './components/users/users.component';
+import { UserDetailsComponent } from './components/users/user-details/user-details.component';
+import { UsersListComponent } from './components/users/users-list/users-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -15,7 +17,10 @@ const routes: Routes = [
   { path: 'logout', component: LogoutComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthenticationGuard] },
-  { path: 'users', component: UsersComponent, canActivate: [AuthenticationGuard] },
+  { path: 'users', component: UsersComponent, canActivate: [AuthenticationGuard], children: [
+    { path: '', component: UsersListComponent },
+    { path: ':userId', component: UserDetailsComponent }
+  ] },
   { path: '**', component: NotFoundComponent }
 ];
 

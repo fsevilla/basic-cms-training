@@ -17,4 +17,11 @@ export class UserService {
     return this.baseHttp.get(url, { includeType: true })
       .toPromise();
   }
+
+  getUserDetails(userId:number) {
+    const url:string = `${environment.apiUrl}${environment.apiPath}users/${userId}`;
+
+    return this.baseHttp.get(url)
+      .toPromise();
+  }
 }

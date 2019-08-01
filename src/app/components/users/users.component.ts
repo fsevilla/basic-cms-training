@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from './user.service';
 
 @Component({
   selector: 'app-users',
@@ -8,29 +7,12 @@ import { UserService } from './user.service';
 })
 export class UsersComponent implements OnInit {
 
-  constructor(
-    private userService:UserService
-  ) { }
+  constructor() { }
 
-  users:any;
+  ngOnInit() {}
 
-  ngOnInit() {
-    this.getUsers();
-  }
-
-  getUsers() {
-    this.userService.getUsers()
-      .then(response => {
-        console.log('Users: ', response);
-        this.users = response;
-      })
-      .catch(err => {
-        console.error('Failed to retrieve users', err);
-      });
-  }
-
-  editUser(user:any) {
-    console.log('Will edit user: ', user);
+  handleOnUpdate(arg) {
+    console.log('Has been updated: ', arg);
   }
 
 }
