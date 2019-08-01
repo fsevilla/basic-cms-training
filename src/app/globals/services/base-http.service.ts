@@ -20,27 +20,31 @@ export class BaseHttpService {
     if(error.status === 401) {
       return throwError('SessionExpired Exception!');
     }
-    let message:string = '';
+    let exception:string = '';
     switch(error.status) {
       case 400:
-          message = 'IncorrectData Exception';
+          exception = 'IncorrectData Exception';
           break;
       case 401:
-          message = 'Authentication Exception';
+          exception = 'Authentication Exception';
           break;
       case 403:
-          message = 'Authorization Exception';
+          exception = 'Authorization Exception';
           break;
       case 404:
-          message = 'NotFound Exception';
+          exception = 'NotFound Exception';
           break;
       case 500:
-          message = 'UnkownError Exception';
+          exception = 'UnkownError Exception';
           break;
       default:
-          message = 'BaseHttp Exception';
+          exception = 'BaseHttp Exception';
     }
-    return throwError(message);
+    return throwError({
+      message: error.error.error,
+      exception,
+      status: error.status
+    });
   }
 
   post(url:string, params:any) {

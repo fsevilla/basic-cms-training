@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, ValidationErrors, AbstractControl } from '@angular/forms'; 
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { SignupService } from './signup.service';
 
@@ -11,8 +13,13 @@ import { SignupService } from './signup.service';
 export class SignupComponent implements OnInit {
 
   signupForm:FormGroup;
+  errorMessage:string;
+
+  @ViewChild('modalContent') modalContent;
 
   constructor(
+    private router: Router,
+    private modalService: NgbModal,
     private signupService: SignupService
   ) { }
 
@@ -71,18 +78,21 @@ export class SignupComponent implements OnInit {
   registerUser() {
     if(!this.validateSignupForm()) return;
     const data = this.getFormValues();
-    console.log('will submit user: ', data);
     this.signupService.register(data)
       .then(response => {
         console.log('Created user: ', response);
+        // Will log in and auto redirect to home
+        // For now, just redirect to log in
+        this.router.navigate(['/login']);
       })
       .catch(err => {
-        console.error('Failed to create user', err);
+        this.errorMessage = err.message;
+        this.open(this.modalContent);
       });
   }
 
-  cancel() {
-    console.log('Send back to Login');
+  open(content) {
+    this.modalService.open(content);
   }
 
 }
