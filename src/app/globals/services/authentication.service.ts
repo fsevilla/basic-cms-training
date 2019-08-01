@@ -23,4 +23,8 @@ export class AuthenticationService {
   isLoggedIn():boolean {
     return !!this.getSession();
   }
+
+  clearSession():void {
+    sessionStorage.removeItem('session');
+  }
 }
