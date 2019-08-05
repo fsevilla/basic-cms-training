@@ -1,0 +1,23 @@
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Created on</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users" (click)="selectUser(user)">
+      <td>{{user.name}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.user_type}}</td>
+      <td>12345</td>
+      <td>
+        <a [routerLink]="user.id">Edit</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p *ngIf="isLoading">Loading data...</p>

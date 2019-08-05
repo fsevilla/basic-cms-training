@@ -17,6 +17,14 @@ export class AuthenticationService {
 
   getToken():string {
     const session = this.getSession();
-    return session ? session['token'] : '';
+    return session ? `${session.token_type} ${session.access_token}` : '';
+  }
+
+  isLoggedIn():boolean {
+    return !!this.getSession();
+  }
+
+  clearSession():void {
+    sessionStorage.removeItem('session');
   }
 }

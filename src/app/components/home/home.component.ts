@@ -9,6 +9,9 @@ import { HomeService } from './home.service';
 })
 export class HomeComponent implements OnInit {
 
+  user:any = {};
+  error:boolean;
+
   constructor(
     private homeService: HomeService
   ) { }
@@ -16,10 +19,11 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.homeService.getContent()
       .then(response => {
-        console.log('Content: ', response);
+        this.user = response;
+        this.error = false;
       })
       .catch(err => {
-        console.error('Failed to load content', err);
+        this.error = true;
       });
   }
 

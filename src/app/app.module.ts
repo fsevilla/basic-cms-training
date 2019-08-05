@@ -11,6 +11,11 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HomeComponent } from './components/home/home.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { InputStatusDirective } from './globals/directives/input-status.directive';
+import { HeaderComponent } from './globals/components/header/header.component';
+import { LogoutComponent } from './components/logout/logout.component';
+import { UsersComponent } from './components/users/users.component';
+import { UserDetailsComponent } from './components/users/user-details/user-details.component';
+import { UsersListComponent } from './components/users/users-list/users-list.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +25,11 @@ import { InputStatusDirective } from './globals/directives/input-status.directiv
     HomeComponent,
     SignupComponent,
     InputStatusDirective,
+    HeaderComponent,
+    LogoutComponent,
+    UsersComponent,
+    UserDetailsComponent,
+    UsersListComponent
   ],
   imports: [
     BrowserModule,
